@@ -8,6 +8,7 @@ export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [newTitle, setNewTitle] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   async function fetchTodos() {
@@ -31,8 +32,9 @@ export default function Home() {
 
   async function addTodo() {
     const title = newTitle.trim()
-    if (!title) return
+    if (!title || isSubmitting) return
 
+    setIsSubmitting(true)
     try {
       const { error } = await supabase.from('todos').insert([{ title }])
       if (error) throw error
@@ -40,6 +42,8 @@ export default function Home() {
       await fetchTodos()
     } catch {
       setError('할 일을 추가하지 못했습니다.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -88,7 +92,7 @@ export default function Home() {
           />
           <button
             onClick={addTodo}
-            disabled={isLoading}
+            disabled={isLoading || isSubmitting}
             className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 disabled:opacity-50"
           >
             추가
