@@ -36,7 +36,7 @@
 
 **⚠️ CRITICAL**: 이 페이즈가 완료되어야 유저 스토리 구현 시작 가능
 
-- [ ] T009 Create Supabase `todos` table by executing `specs/001-todo-webapp/contracts/supabase-schema.sql` via Supabase MCP or Supabase SQL Editor (schema: id uuid PK, title text NOT NULL, is_completed boolean DEFAULT false, created_at timestamptz DEFAULT now(); RLS disabled)
+- [x] T009 Create Supabase `todos` table by executing `specs/001-todo-webapp/contracts/supabase-schema.sql` via Supabase MCP or Supabase SQL Editor (schema: id uuid PK, title text NOT NULL, is_completed boolean DEFAULT false, created_at timestamptz DEFAULT now(); RLS disabled)
 - [x] T010 [P] Create Supabase client module in `my-todo-app/lib/supabase.ts` using `createClient` from `@supabase/supabase-js` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` env vars
 - [x] T011 [P] Create Todo TypeScript interface in `my-todo-app/types/todo.ts` with fields: `id: string`, `title: string`, `is_completed: boolean`, `created_at: string`
 
