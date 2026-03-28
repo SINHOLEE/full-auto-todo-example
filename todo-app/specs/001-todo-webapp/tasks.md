@@ -19,14 +19,14 @@
 
 **Purpose**: Next.js 프로젝트 생성 및 기본 구조 설정
 
-- [ ] T001 Create Next.js project using `npx create-next-app@latest my-todo-app --typescript --tailwind --app --no-src-dir --import-alias "@/*"` in `/Users/siny/WebstormProjects/full-auto-todo-example/todo-app/`
-- [ ] T002 Install Supabase client dependency: `npm install @supabase/supabase-js` in `my-todo-app/`
-- [ ] T003 [P] Install Jest + React Testing Library: `npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event ts-jest` in `my-todo-app/`
-- [ ] T004 [P] Install Playwright: `npm install -D @playwright/test` then `npx playwright install` in `my-todo-app/`
-- [ ] T005 [P] Configure Jest in `my-todo-app/jest.config.ts`: set `testEnvironment: 'jsdom'`, `setupFilesAfterFramework: ['@testing-library/jest-dom']`, module name mapper for Next.js (`@/` alias)
-- [ ] T006 [P] Configure Playwright in `my-todo-app/playwright.config.ts`: set `baseURL: 'http://localhost:3000'`, `testDir: './e2e'`, webServer command `npm run dev`
-- [ ] T007 [P] Create `.env.local` in `my-todo-app/.env.local` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` placeholders
-- [ ] T008 [P] Add `.env.local` to `my-todo-app/.gitignore` (verify it's excluded from git)
+- [x] T001 Create Next.js project using `npx create-next-app@latest my-todo-app --typescript --tailwind --app --no-src-dir --import-alias "@/*"` in `/Users/siny/WebstormProjects/full-auto-todo-example/todo-app/`
+- [x] T002 Install Supabase client dependency: `npm install @supabase/supabase-js` in `my-todo-app/`
+- [x] T003 [P] Install Jest + React Testing Library: `npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event ts-jest` in `my-todo-app/`
+- [x] T004 [P] Install Playwright: `npm install -D @playwright/test` then `npx playwright install` in `my-todo-app/`
+- [x] T005 [P] Configure Jest in `my-todo-app/jest.config.ts`: set `testEnvironment: 'jsdom'`, `setupFilesAfterFramework: ['@testing-library/jest-dom']`, module name mapper for Next.js (`@/` alias)
+- [x] T006 [P] Configure Playwright in `my-todo-app/playwright.config.ts`: set `baseURL: 'http://localhost:3000'`, `testDir: './e2e'`, webServer command `npm run dev`
+- [x] T007 [P] Create `.env.local` in `my-todo-app/.env.local` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` placeholders
+- [x] T008 [P] Add `.env.local` to `my-todo-app/.gitignore` (verify it's excluded from git)
 
 ---
 
@@ -37,8 +37,8 @@
 **⚠️ CRITICAL**: 이 페이즈가 완료되어야 유저 스토리 구현 시작 가능
 
 - [ ] T009 Create Supabase `todos` table by executing `specs/001-todo-webapp/contracts/supabase-schema.sql` via Supabase MCP or Supabase SQL Editor (schema: id uuid PK, title text NOT NULL, is_completed boolean DEFAULT false, created_at timestamptz DEFAULT now(); RLS disabled)
-- [ ] T010 [P] Create Supabase client module in `my-todo-app/lib/supabase.ts` using `createClient` from `@supabase/supabase-js` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` env vars
-- [ ] T011 [P] Create Todo TypeScript interface in `my-todo-app/types/todo.ts` with fields: `id: string`, `title: string`, `is_completed: boolean`, `created_at: string`
+- [x] T010 [P] Create Supabase client module in `my-todo-app/lib/supabase.ts` using `createClient` from `@supabase/supabase-js` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` env vars
+- [x] T011 [P] Create Todo TypeScript interface in `my-todo-app/types/todo.ts` with fields: `id: string`, `title: string`, `is_completed: boolean`, `created_at: string`
 
 **Checkpoint**: Foundation ready — Supabase DB 테이블 생성 완료, 클라이언트 모듈 및 타입 정의 완료. 유저 스토리 구현 시작 가능.
 
@@ -52,15 +52,15 @@
 
 ### Tests for User Story 1 (TDD — 구현 전 작성, FAIL 확인 후 구현)
 
-- [ ] T012 [P] [US1] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock `lib/supabase` module, render `<Home />`, assert todo list renders mocked todos, assert "나의 할 일" heading is present
-- [ ] T013 [P] [US1] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: test `addTodo` — type text in input, click Add button, assert supabase insert was called with trimmed title; test empty input — click Add with empty input, assert insert NOT called
-- [ ] T014 [P] [US1] Write Playwright E2E test in `my-todo-app/e2e/todo-add.spec.ts`: navigate to `/`, fill input with "E2E 테스트 할 일", click Add button, assert new item appears in list, reload page, assert item still present
+- [x] T012 [P] [US1] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock `lib/supabase` module, render `<Home />`, assert todo list renders mocked todos, assert "나의 할 일" heading is present
+- [x] T013 [P] [US1] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: test `addTodo` — type text in input, click Add button, assert supabase insert was called with trimmed title; test empty input — click Add with empty input, assert insert NOT called
+- [x] T014 [P] [US1] Write Playwright E2E test in `my-todo-app/e2e/todo-add.spec.ts`: navigate to `/`, fill input with "E2E 테스트 할 일", click Add button, assert new item appears in list, reload page, assert item still present
 
 ### Implementation for User Story 1
 
-- [ ] T015 [US1] Implement main page in `my-todo-app/app/page.tsx` as Client Component (`'use client'`) with: useState for `todos: Todo[]` and `newTitle: string`, useEffect to fetch todos on mount (`SELECT * FROM todos ORDER BY created_at DESC` via supabase), `addTodo` function (trim validation + INSERT + refetch), input field bound to `newTitle`, Add button that calls `addTodo`, and rendered todo list showing each item's title
-- [ ] T016 [US1] Add empty input validation in `my-todo-app/app/page.tsx`: `addTodo` must call `title.trim()` and return early if empty (FR-006)
-- [ ] T017 [US1] Style the page in `my-todo-app/app/page.tsx` using Tailwind CSS: "나의 할 일" heading, styled text input and Add button, todo list with each item displayed cleanly (FR-007)
+- [x] T015 [US1] Implement main page in `my-todo-app/app/page.tsx` as Client Component (`'use client'`) with: useState for `todos: Todo[]` and `newTitle: string`, useEffect to fetch todos on mount (`SELECT * FROM todos ORDER BY created_at DESC` via supabase), `addTodo` function (trim validation + INSERT + refetch), input field bound to `newTitle`, Add button that calls `addTodo`, and rendered todo list showing each item's title
+- [x] T016 [US1] Add empty input validation in `my-todo-app/app/page.tsx`: `addTodo` must call `title.trim()` and return early if empty (FR-006)
+- [x] T017 [US1] Style the page in `my-todo-app/app/page.tsx` using Tailwind CSS: "나의 할 일" heading, styled text input and Add button, todo list with each item displayed cleanly (FR-007)
 
 **Checkpoint**: US1 완료 — Jest 테스트 PASS, Playwright E2E PASS. 브라우저에서 `http://localhost:3000` 접속하여 독립 검증 가능.
 
@@ -74,15 +74,15 @@
 
 ### Tests for User Story 2 (TDD — 구현 전 작성, FAIL 확인 후 구현)
 
-- [ ] T018 [P] [US2] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock supabase update call, render todo list with one incomplete item, click its checkbox, assert supabase update was called with `is_completed: true`; click again, assert called with `is_completed: false`
-- [ ] T019 [P] [US2] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: render completed todo, assert title element has `line-through` class (or equivalent completed style)
-- [ ] T020 [P] [US2] Write Playwright E2E test in `my-todo-app/e2e/todo-toggle.spec.ts`: add a todo, click its checkbox, assert title has strikethrough style, reload page, assert completed state persists; click checkbox again, assert item returns to incomplete style
+- [x] T018 [P] [US2] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock supabase update call, render todo list with one incomplete item, click its checkbox, assert supabase update was called with `is_completed: true`; click again, assert called with `is_completed: false`
+- [x] T019 [P] [US2] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: render completed todo, assert title element has `line-through` class (or equivalent completed style)
+- [x] T020 [P] [US2] Write Playwright E2E test in `my-todo-app/e2e/todo-toggle.spec.ts`: add a todo, click its checkbox, assert title has strikethrough style, reload page, assert completed state persists; click checkbox again, assert item returns to incomplete style
 
 ### Implementation for User Story 2
 
-- [ ] T021 [US2] Add `toggleTodo` function in `my-todo-app/app/page.tsx`: takes todo `id` and current `is_completed`, runs `UPDATE todos SET is_completed = !is_completed WHERE id = :id` via supabase, then refetches todos list
-- [ ] T022 [US2] Add checkbox UI to each todo item in `my-todo-app/app/page.tsx`: `<input type="checkbox">` bound to `is_completed`, `onChange` calls `toggleTodo(todo.id, todo.is_completed)`
-- [ ] T023 [US2] Add visual distinction for completed todos in `my-todo-app/app/page.tsx` using Tailwind CSS: apply `line-through` and `text-gray-400` (or similar) to title text when `is_completed` is true
+- [x] T021 [US2] Add `toggleTodo` function in `my-todo-app/app/page.tsx`: takes todo `id` and current `is_completed`, runs `UPDATE todos SET is_completed = !is_completed WHERE id = :id` via supabase, then refetches todos list
+- [x] T022 [US2] Add checkbox UI to each todo item in `my-todo-app/app/page.tsx`: `<input type="checkbox">` bound to `is_completed`, `onChange` calls `toggleTodo(todo.id, todo.is_completed)`
+- [x] T023 [US2] Add visual distinction for completed todos in `my-todo-app/app/page.tsx` using Tailwind CSS: apply `line-through` and `text-gray-400` (or similar) to title text when `is_completed` is true
 
 **Checkpoint**: US2 완료 — Jest 테스트 PASS, Playwright E2E PASS.
 
@@ -96,13 +96,13 @@
 
 ### Tests for User Story 3 (TDD — 구현 전 작성, FAIL 확인 후 구현)
 
-- [ ] T024 [P] [US3] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock supabase delete call, render todo list with one item, click its delete button, assert supabase delete was called with correct id, assert item removed from rendered list
-- [ ] T025 [P] [US3] Write Playwright E2E test in `my-todo-app/e2e/todo-delete.spec.ts`: add a todo, click its delete button, assert item disappears from list immediately, reload page, assert item does not reappear
+- [x] T024 [P] [US3] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: mock supabase delete call, render todo list with one item, click its delete button, assert supabase delete was called with correct id, assert item removed from rendered list
+- [x] T025 [P] [US3] Write Playwright E2E test in `my-todo-app/e2e/todo-delete.spec.ts`: add a todo, click its delete button, assert item disappears from list immediately, reload page, assert item does not reappear
 
 ### Implementation for User Story 3
 
-- [ ] T026 [US3] Add `deleteTodo` function in `my-todo-app/app/page.tsx`: takes todo `id`, runs `DELETE FROM todos WHERE id = :id` via supabase, then refetches todos list
-- [ ] T027 [US3] Add delete button UI to each todo item in `my-todo-app/app/page.tsx`: `<button>` with delete label (e.g., "삭제" or "✕"), `onClick` calls `deleteTodo(todo.id)`, styled with Tailwind CSS
+- [x] T026 [US3] Add `deleteTodo` function in `my-todo-app/app/page.tsx`: takes todo `id`, runs `DELETE FROM todos WHERE id = :id` via supabase, then refetches todos list
+- [x] T027 [US3] Add delete button UI to each todo item in `my-todo-app/app/page.tsx`: `<button>` with delete label (e.g., "삭제" or "✕"), `onClick` calls `deleteTodo(todo.id)`, styled with Tailwind CSS
 
 **Checkpoint**: US3 완료 — Jest 테스트 PASS, Playwright E2E PASS. 전체 CRUD 자동화 테스트 완료.
 
@@ -116,7 +116,7 @@
 
 ### Tests for User Story 4
 
-- [ ] T028 [P] [US4] Write Playwright E2E test in `my-todo-app/e2e/todo-deployed.spec.ts`: set `baseURL` to deployed Vercel URL via env var `PLAYWRIGHT_BASE_URL`, navigate to `/`, assert app loads, add/toggle/delete a todo and assert each operation succeeds
+- [x] T028 [P] [US4] Write Playwright E2E test in `my-todo-app/e2e/todo-deployed.spec.ts`: set `baseURL` to deployed Vercel URL via env var `PLAYWRIGHT_BASE_URL`, navigate to `/`, assert app loads, add/toggle/delete a todo and assert each operation succeeds
 
 ### Implementation for User Story 4
 
@@ -132,12 +132,14 @@
 
 **Purpose**: UX 개선 및 엣지 케이스 처리
 
-- [ ] T032 [P] Add network error handling in `my-todo-app/app/page.tsx`: wrap supabase calls in try/catch, display error message to user (e.g., `<p className="text-red-500">오류가 발생했습니다</p>`) when fetch/insert/update/delete fails
-- [ ] T033 [P] Add loading state in `my-todo-app/app/page.tsx`: `useState` for `isLoading: boolean`, show loading indicator during initial fetch (`useEffect`), disable Add button while adding
-- [ ] T034 Handle long title display in `my-todo-app/app/page.tsx`: apply Tailwind `break-words` or `truncate` class to title element to prevent UI breakage for titles over 100 characters
+- [x] T032 [P] Add network error handling in `my-todo-app/app/page.tsx`: wrap supabase calls in try/catch, display error message to user (e.g., `<p className="text-red-500">오류가 발생했습니다</p>`) when fetch/insert/update/delete fails
+- [x] T033 [P] Add loading state in `my-todo-app/app/page.tsx`: `useState` for `isLoading: boolean`, show loading indicator during initial fetch (`useEffect`), disable Add button while adding
+- [x] T034 Handle long title display in `my-todo-app/app/page.tsx`: apply Tailwind `break-words` or `truncate` class to title element to prevent UI breakage for titles over 100 characters
 - [ ] T035 [P] Write Jest unit test in `my-todo-app/__tests__/page.test.tsx`: test that Add button is disabled while loading, test that error message renders on supabase failure
 - [ ] T036 Run all tests: `npm test` (Jest) and `npx playwright test` (Playwright) — confirm all PASS
 - [ ] T037 Run quickstart.md validation: follow steps in `specs/001-todo-webapp/quickstart.md` to verify full setup flow works end-to-end
+
+> **Note**: T009 (Supabase 테이블 생성), T029-T031 (GitHub 푸시 및 Vercel 배포)은 사용자가 직접 실행해야 합니다.
 
 ---
 
